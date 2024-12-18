@@ -45,4 +45,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Festivals that belong to the user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function festivals() {
+        return $this->belongsToMany(Festival::class);
+    }
+
+    /**
+     * Busses that belong to the user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function busses() {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    /**
+     * Friends that belong to the user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function friends() {
+        return $this->belongsToMany(User::class);
+    }
 }
