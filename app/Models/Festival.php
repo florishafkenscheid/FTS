@@ -13,4 +13,8 @@ class Festival extends Model
     public function users() {
         return $this->belongsToMany(User::class);
     }
+
+    public function news() {
+        return $this->belongsTo(FestivalNews::class);
+    }
 }
