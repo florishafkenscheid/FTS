@@ -15,6 +15,6 @@ class Festival extends Model
     }
 
     public function news() {
-        return $this->belongsTo(FestivalNews::class);
+        return $this->has(FestivalNews::class);
     }
 }

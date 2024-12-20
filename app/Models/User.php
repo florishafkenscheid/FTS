@@ -55,11 +55,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Busses that belong to the user
+     * Bookings that belong to the user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function busses() {
-        return $this->belongsToMany(Bus::class);
+    public function bookings() {
+        return $this->belongsToMany(Booking::class);
     }
 
     /**
