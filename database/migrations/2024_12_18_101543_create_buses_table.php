@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string('starting_point');
-            $table->string('destination');
-            $table->timestamp('departure_at');
-            $table->timestamp('arrival_at');
-            $table->unsignedInteger('passengers');
-            $table->timestamps();
+            $table->foreign('trip_id')->references('id')->on('trips');
+            $table->string('license_plate', 10);
+            $table->timestamp('time_since_maintenance')->nullable();
+            $table->integer('odometer');
+            $table->integer('max_capacity')->default(35);
+            $table->integer('toilets');
+            $table->string('brand', 100);
         });
     }
 

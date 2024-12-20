@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
+            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->string('departure_from', 255);
+            $table->timestamp('departure_scheduled_at');
+            $table->string('destination', 255);
+            $table->timestamp('arrival_scheduled_at');
             $table->timestamps();
         });
     }

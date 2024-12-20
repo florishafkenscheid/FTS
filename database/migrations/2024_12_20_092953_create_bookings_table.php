@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('status')->default('0');
         });
     }
 

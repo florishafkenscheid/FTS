@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreign('festival_id')->references('id')->on('festivals');
             $table->text('content');
-            $table->string('title');
+            $table->string('title', 255);
             $table->mediumText('header_image')->charset('binary');
             $table->timestamps();
         });
