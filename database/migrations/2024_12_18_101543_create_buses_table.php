@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreign('trip_id')->references('id')->on('trips');
             $table->string('license_plate', 10);
             $table->timestamp('time_since_maintenance')->nullable();
-            $table->integer('odometer');
-            $table->integer('max_capacity')->default(35);
-            $table->integer('toilets');
+            $table->unsignedInteger('odometer');
+            $table->unsignedInteger('max_capacity')->default(35);
+            $table->unsignedInteger('toilets');
             $table->string('brand', 100);
         });
     }
