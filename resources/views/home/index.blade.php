@@ -1,3 +1,8 @@
-<div>
-    <!-- Very little is needed to make a happy life. - Marcus Aurelius -->
+@extends('layouts.app')
+@section('content')
+
+<div class="h-[200vh] dark:text-white text-black">
+    <p>Home sweet home</p>
 </div>
+
+@endsection
