@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('festival_news', function (Blueprint $table) {
             $table->id();
-            $table->foreign('festival_id')->references('id')->on('festivals');
+            $table->foreignId('festival_id')->constrained();
             $table->text('content');
             $table->string('title', 255);
             $table->mediumText('header_image')->charset('binary');
