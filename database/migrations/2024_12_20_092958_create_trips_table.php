@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->foreignId('booking_id')->constrained();
             $table->string('departure_from', 255);
             $table->timestamp('departure_scheduled_at');
             $table->string('destination', 255);
