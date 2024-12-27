@@ -7,14 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Festival extends Model
 {
     /**
-     * Users that belong to the festival
+     * Users that belong to this festival
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users() {
         return $this->belongsToMany(User::class);
     }
 
+    /**
+     * News that belongs to this festival
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function news() {
-        return $this->has(FestivalNews::class);
+        return $this->hasMany(FestivalNews::class);
+    }
+
+    /**
+     * Trips that belong to this festival
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function trips() {
+        return $this->hasMany(Trip::class);
     }
 }

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Bus extends Model
 {
     /**
-     * Users that belong to the festival
+     * Trips that belong to the bus.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users() {
-        return $this->belongsToMany(User::class);
+    public function trips() {
+        return $this->belongsToMany(Trip::class);
     }
 }
