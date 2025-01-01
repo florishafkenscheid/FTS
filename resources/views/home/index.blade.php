@@ -8,7 +8,7 @@
     <div class="min-h-32 h-[20vh] -mb-24">
         <!-- trip menu -->
         <div class="bg-slate-600 w-full h-4/6 -translate-y-2/3">
-            <form class="flex h-full px-6 items-center justify-around">
+            <form class="flex h-full px-6 items-center justify-around" action={{route('busreizen')}}>
                 <div class="flex flex-col -mr-8 w-1/4"> <!-- from -->
                     <label class="px-3">From</label>
                     <input class="bg-slate-400 rounded-md w-11/12">
@@ -32,7 +32,7 @@
             </form>
         </div>
     </div>
-    <x-linebreak/>
+    <x-h-linebreak/>
     <div class="h-[50vh] -mt-4 mb-4">
         <!-- upcoming festivals -->
         <h2 class="pb-8 text-3xl">Upcoming</h2>
@@ -50,7 +50,7 @@
             <x-festival-post/>
         </div>
     </div>
-    <x-linebreak/>
+    <x-h-linebreak/>
     <div class="h-[50vh] -mt-4 mb-4">
         <!-- festival news -->
         <h2 class="pb-8 text-3xl">Festival News</h2>
