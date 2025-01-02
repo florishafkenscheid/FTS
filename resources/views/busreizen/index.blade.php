@@ -17,8 +17,8 @@
     <div class="h-5/6 w-fit flex self-center">
         <x-v-linebreak/>
     </div>
-    <div>
-
+    <div class="h-full w-2/3 p-8">
+        <x-festival-trip-view/>
     </div>
 </div>
 
