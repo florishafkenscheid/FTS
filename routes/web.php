@@ -14,6 +14,34 @@ Route::get('/profile', function() {
     return view('profile.index');
 })->name('profile');
 
+Route::get('/login', function() {
+    return view('login.index');
+})->name('login');
+
+Route::get('/register', function() {
+    return view('register.index');
+})->name('register');
+
+Route::get('/contact', function () {
+    return view('contact.index');
+})->name('contact');
+
+Route::get('/profile/edit', function() {
+    return view('profile.edit');
+})->name('edit_profile');
+
+Route::get('/profile/friends', function() {
+    return view('profile.friends');
+})->name('friends');
+
+Route::get('/beheer', function() {
+    return view('beheer.index');
+})->name('beheer');
+
+Route::get('/beheer/create', function() {
+    return view('beheer.create');
+})->name('create_festival');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
