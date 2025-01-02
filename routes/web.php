@@ -14,6 +14,14 @@ Route::get('/profile', function() {
     return view('profile.index');
 })->name('profile');
 
+Route::get('/profile/edit', function() {
+    return view('profile.edit');
+})->name('edit_profile');
+
+Route::get('/profile/friends', function() {
+    return view('profile.friends');
+})->name('friends');
+
 Route::get('/login', function() {
     return view('login.index');
 })->name('login');
@@ -25,14 +33,6 @@ Route::get('/register', function() {
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
-
-Route::get('/profile/edit', function() {
-    return view('profile.edit');
-})->name('edit_profile');
-
-Route::get('/profile/friends', function() {
-    return view('profile.friends');
-})->name('friends');
 
 Route::get('/beheer', function() {
     return view('beheer.index');

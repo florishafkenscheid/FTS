@@ -22,7 +22,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="text-black dark:text-white">
                 @yield('content')
             </main>
 
