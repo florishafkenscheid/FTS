@@ -19,7 +19,7 @@
     </div>
     <x-h-linebreak/>
     <div class="h-1/2 w-full flex flex-row">
-        <div class="h-full w-1/2 flex flex-col">
+        <div class="h-full w-1/2 flex flex-col  -mt-4">
             <div class="h-fit">
                 <h2 class="text-2xl ml-10 w-fit h-fit">Previous Festivals</h2>
                 <div class=" flex flex-row gap-2 ml-10 w-fit h-fit items-center"> <!-- todo: functionality (database dependant) -->
@@ -42,8 +42,20 @@
         <div class="h-[125%] w-fit flex self-center mt-1">
             <x-v-linebreak/>
         </div>
-        <div class="h-full w-1/2">
-
+        <div class="h-full w-1/2 -mt-4 flex flex-col">
+            <div class="flex flex-row justify-between px-8 items-center">
+                <h2 class="text-2xl">Friend Activity</h2>
+                <h4 class="text-sm">Upcoming</h4>
+            </div>
+            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
+                <x-friend-activity/>
+                <x-friend-activity/>
+                <x-friend-activity/>
+                <x-friend-activity/>
+                <x-friend-activity/>
+                <x-friend-activity/>
+                <x-friend-activity/>
+            </div>
         </div>
     </div>
 </div>
