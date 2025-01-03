@@ -47,7 +47,7 @@
                 <h2 class="text-2xl">Friend Activity</h2>
                 <h4 class="text-sm">Upcoming</h4>
             </div>
-            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
+            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar"> <!-- misschien een gradient beneden om aan te duiden dat je kan scrollen -->
                 <x-friend-activity/>
                 <x-friend-activity/>
                 <x-friend-activity/>
