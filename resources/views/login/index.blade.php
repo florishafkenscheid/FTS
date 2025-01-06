@@ -11,14 +11,14 @@
             <div class="w-full px-8 py-16 h-full flex flex-col gap-20">
                 <div class="flex flex-col">
                     <h2 class="text-4xl">Log in</h2>
-                    <h4>Don't have an account? <a href="/login" class="text-blue-400">Register</a></h4>
+                    <h4>Don't have an account? <a href="/register" class="text-blue-400">Register</a></h4>
                 </div>
                 <form class="flex flex-col gap-8">
                     <div class="flex flex-col gap-2">
                         <input id="email" type="email" placeholder="Email"
-                        class="rounded-lg">
+                        class="rounded-lg text-black" required>
                         <input id="password" type="password" placeholder="Enter your password"
-                        class="rounded-lg">
+                        class="rounded-lg text-black" required>
                     </div>
                     <input id="submit" type="submit" value="Log in"
                     class="h-fit w-full rounded-lg bg-slate-600 cursor-pointer">
