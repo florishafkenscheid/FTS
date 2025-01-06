@@ -42,6 +42,10 @@ Route::get('/beheer/create', function() {
     return view('beheer.create');
 })->name('create_festival');
 
+Route::get('/beheer/edit/{id}', function (string $id) {
+    return view('beheer.edit');
+})->whereNumber('id')->name('edit_festival');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
