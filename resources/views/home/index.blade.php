@@ -7,7 +7,7 @@
     </div>
     <div class="min-h-32 h-[20vh] -mb-24">
         <!-- trip menu -->
-        <div class="bg-slate-600 w-full h-4/6 -translate-y-2/3">
+        <div class="bg-slate-600 w-full h-2/3 -translate-y-2/3">
             <form class="flex h-full px-6 items-center justify-around" action={{route('busreizen')}}>
                 <div class="flex flex-col -mr-8 w-1/4"> <!-- from -->
                     <label class="px-3">From</label>
@@ -26,8 +26,7 @@
                     <input class="bg-slate-400 rounded-md w-11/12" type="number" value="0">
                 </div>
                 <div class="flex size-12 justify-center items-center translate-y-3"> <!-- submit -->
-                    <i class="fa-solid fa-arrow-up fa-xl absolute -z-10"></i>
-                    <input type="submit" value class="size-12 cursor-pointer">
+                    <x-submit/>
                 </div>
             </form>
         </div>

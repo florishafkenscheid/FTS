@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FestivalController;
 
 Route::get('/', function () {
     return view('home.index');
@@ -37,6 +38,8 @@ Route::get('/contact', function () {
 Route::get('/beheer', function() {
     return view('beheer.index');
 })->name('beheer');
+
+Route::post('/beheer', [FestivalController::class, 'store'])->name('store_festival');
 
 Route::get('/beheer/create', function() {
     return view('beheer.create');

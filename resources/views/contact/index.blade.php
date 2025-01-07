@@ -9,9 +9,8 @@
                 <input placeholder="Name" type="text" class="bg-slate-600 placeholder-white rounded-md">
                 <input placeholder="Email" type="email" class="bg-slate-600 placeholder-white rounded-md">
                 <textarea placeholder="Message" type="text" class="bg-slate-600 placeholder-white resize-none no-scrollbar rounded-md" maxlength="3000" rows="4"></textarea>
-                <div class="size-8 ml-auto relative">
-                    <i class="fa-solid fa-arrow-up fa-xl absolute translate-y-4 translate-x-2 z-10"></i>
-                    <input type="submit" value class="size-8 cursor-pointer relative z-20">
+                <div class="flex size-12 ml-auto items-center z-20 justify-center">
+                    <x-submit/>
                 </div>
             </form>
         </div>
