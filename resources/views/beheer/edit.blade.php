@@ -1,8 +1,7 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 
 <div class="h-[85vh]">
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
+    
 </div>
 
-@endsection
+</x-app-layout>

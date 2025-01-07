@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 
 <div class="h-[175vh] dark:text-white text-black flex flex-col overflow-hidden px-[10vw]">
     <div class="min-h-72 h-[40vh] w-screen -mx-[10vw]">
@@ -69,4 +68,4 @@
     </div>
 </div>
 
-@endsection
+</x-app-layout>

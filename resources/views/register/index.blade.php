@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 
 <div class="h-[85vh] w-full overflow-hidden flex justify-center items-center">
     <div class="bg-slate-600 h-5/6 w-2/3 rounded-md flex flex-row">
@@ -38,4 +37,4 @@
     </div>
 </div>
 
-@endsection
+</x-app-layout>

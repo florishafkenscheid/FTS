@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'FTS') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,12 +23,12 @@
 
             <!-- Page Content -->
             <main class="text-black dark:text-white">
-                @yield('content')
+                {{$slot}}
             </main>
 
             <!-- Page Footer -->
             <footer class="bg-white dark:bg-gray-800 shadow h-[5vh]">
-                @include ('layouts.footer')
+                @include('layouts.footer')
             </footer>
         </div>
     </body>

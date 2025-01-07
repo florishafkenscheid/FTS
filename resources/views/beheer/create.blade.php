@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 
 <div class="h-[85vh]">
     <div class="p-12 flex flex-col gap-8">
@@ -19,4 +18,4 @@
     </div>
 </div>
 
-@endsection
+</x-app-layout>
