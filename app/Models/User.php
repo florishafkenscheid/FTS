@@ -59,7 +59,7 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function bookings() {
-        return $this->belongsToMany(Booking::class);
+        return $this->hasMany(Booking::class);
     }
 
     /**
@@ -67,6 +67,6 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function friends() {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class);
     }
 }

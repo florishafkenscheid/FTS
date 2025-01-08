@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('festival_id')->constrained();
             $table->text('content');
             $table->string('title', 255);
-            $table->mediumText('header_image')->charset('binary');
+            $table->mediumText('header_image')->charset('binary')->nullable();
             $table->timestamps();
         });
     }
