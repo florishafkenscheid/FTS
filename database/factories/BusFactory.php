@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Trip;
 
@@ -10,6 +11,7 @@ use App\Models\Trip;
  */
 class BusFactory extends Factory
 {
+    protected $model = Bus::class;
     /**
      * Define the model's default state.
      *

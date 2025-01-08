@@ -4,12 +4,14 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Festival;
+use App\Models\FestivalNews;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FestivalNews>
  */
 class FestivalNewsFactory extends Factory
 {
+    protected $model = FestivalNews::class;
     /**
      * Define the model's default state.
      *

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    use HasFactory;
     /**
      * Trips that belong to the booking
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
