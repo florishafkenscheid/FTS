@@ -19,7 +19,7 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->rand(0, 2),
+            'status' => fake()->numberBetween(0, 2),
         ];
     }
 }

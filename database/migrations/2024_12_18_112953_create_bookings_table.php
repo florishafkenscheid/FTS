@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->unsignedInteger('status')->default('0');
         });

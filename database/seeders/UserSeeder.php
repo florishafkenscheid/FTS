@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(20)
-            ->has(Booking::factory())
-            ->has(Festival::factory())
+            ->has(Booking::factory()->count(3))
+            ->has(Festival::factory()->count(3))
             ->create();
     }
 }
