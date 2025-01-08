@@ -20,8 +20,7 @@ class BusFactory extends Factory
     public function definition(): array
     {
         return [
-            'trip_id' => Trip::factory(),
-            'license_plate' => fake()->regexify('([A-Z]|[0-9]){1,3}-([A-Z]|[0-9]){1,3}-([A-Z]|[0-9]){1,3}'),
+            'license_plate' => fake()->regexify('([A-Z]{1,3}|[0-9]{1,3})-([A-Z]{1,3}|[0-9]{1,3})-([A-Z]{1,3}|[0-9]{1,3})'),
             'time_since_maintenance' => fake()->unixTime(),
             'odometer' => fake()->numberBetween(0, 2000000),
             'max_capacity' => 35,

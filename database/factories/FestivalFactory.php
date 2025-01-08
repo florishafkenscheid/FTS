@@ -22,7 +22,7 @@ class FestivalFactory extends Factory
             'name' => fake()->word(),
             'description' => fake()->paragraph(),
             'start_at' => fake()-> dateTimeInInterval('-1 week', '+1 day'),
-            'end_at' => fake()->dateTimeInInterval('-1 week', '+6 days'),
+            'end_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
             'attendees' => fake()->randomNumber(),
         ];
     }

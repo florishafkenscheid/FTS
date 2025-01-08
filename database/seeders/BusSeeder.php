@@ -16,7 +16,6 @@ class BusSeeder extends Seeder
     {
         Bus::factory()
             ->count(10)
-            ->has(Trip::factory())
             ->create();
     }
 }

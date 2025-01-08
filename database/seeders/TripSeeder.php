@@ -17,8 +17,8 @@ class TripSeeder extends Seeder
     {
         Trip::factory()
             ->count(10)
-            ->for(Festival::factory())
-            ->for(Bus::factory())
+            ->has(Festival::factory())
+            ->has(Bus::factory())
             ->create();
     }
 }

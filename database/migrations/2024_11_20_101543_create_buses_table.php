@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('trip_id')->constrained();
-            $table->string('license_plate', 10);
-            $table->timestamp('time_since_maintenance')->nullable();
+            $table->string('license_plate', 24);
+            $table->bigInteger('time_since_maintenance')->nullable();
             $table->unsignedInteger('odometer');
             $table->unsignedInteger('max_capacity')->default(35);
             $table->unsignedInteger('toilets');
             $table->string('brand', 100);
+            $table->timestamps();
         });
     }
 

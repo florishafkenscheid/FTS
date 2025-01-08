@@ -18,7 +18,7 @@ class FestivalSeeder extends Seeder
     {
         Festival::factory()
                 ->count(10)
-                ->has(FestivalNews::factory())
+                ->has(FestivalNews::factory(), 'news')
                 ->has(Trip::factory())
                 ->has(User::factory())
                 ->create();

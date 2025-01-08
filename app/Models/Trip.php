@@ -14,6 +14,10 @@ class Trip extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function festival() {
-        return $this->hasOne(Festival::class);
+        return $this->belongsTo(Festival::class);
+    }
+    
+    public function bus() {
+        return $this->belongsTo(Bus::class);
     }
 }

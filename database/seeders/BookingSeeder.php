@@ -16,6 +16,7 @@ class BookingSeeder extends Seeder
     {
         Booking::factory()
                 ->count(10)
+                ->for(User::factory())
                 ->create();
     }
 }
