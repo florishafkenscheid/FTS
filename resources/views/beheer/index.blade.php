@@ -19,6 +19,11 @@
     <div class="h-5/6 w-fit flex self-center">
         <x-v-linebreak/>
     </div>
+    <div class="flex-grow">
+        @isset($festival)
+        {{$festival}}
+        @endisset
+    </div>
 </div>
 
 </x-app-layout>

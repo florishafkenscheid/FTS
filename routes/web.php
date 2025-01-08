@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FestivalController;
+use App\Models\Festival;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('home.index');
@@ -45,13 +47,21 @@ Route::get('/beheer/create', function() {
     return view('beheer.create');
 })->name('create_festival');
 
-Route::get('/beheer/edit/{id}', function (string $id) {
-    return view('beheer.edit');
-})->whereNumber('id')->name('edit_festival');
+Route::get('/beheer/edit/{id}', function (int $id) {
+    $festival = Festival::find($id);
+    return view('beheer.edit', compact('festival'));
+})->name('edit_festival');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/beheer/show/{id}', function (int $id) {
+    $festival = Festival::find($id);
+    return view('beheer.index', compact('festival'));
+})->name('show_festival');
+
+Route::patch('/beheer/edit/{id}', [FestivalController::class, 'update'])->name('update_festival');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
