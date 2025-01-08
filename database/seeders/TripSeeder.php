@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bus;
+use App\Models\Festival;
+use App\Models\Trip;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +15,10 @@ class TripSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Trip::factory()
+            ->count(10)
+            ->for(Festival::factory())
+            ->for(Bus::factory())
+            ->create();
     }
 }
