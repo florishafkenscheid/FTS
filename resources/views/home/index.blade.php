@@ -6,7 +6,7 @@
     </div>
     <div class="min-h-32 h-[20vh] -mb-24">
         <!-- trip menu -->
-        <div class="bg-slate-600 w-full h-2/3 -translate-y-2/3">
+        <div class="bg-slate-600 w-full h-2/3 -translate-y-2/3 rounded-md">
             <form class="flex h-full px-6 items-center justify-around" action={{route('busreizen')}}>
                 <div class="flex flex-col -mr-8 w-1/4"> <!-- from -->
                     <label class="px-3">From</label>
