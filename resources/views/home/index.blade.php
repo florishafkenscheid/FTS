@@ -35,17 +35,10 @@
         <!-- upcoming festivals -->
         <h2 class="pb-8 text-3xl">Upcoming</h2>
         <div class="max-h-[90%] flex flex-row flex-wrap gap-8 justify-center overflow-y-scroll no-scrollbar">
-            <!-- needs logic
-            foreach ($festivals as $festival)
-            
-            endforeach
-            -->
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
+            @forelse ($festivals as $festival)
+                <x-festival.post :festival="$festival"/>
+            @empty
+            @endforelse
         </div>
     </div>
     <x-h-linebreak/>
@@ -53,17 +46,10 @@
         <!-- festival news -->
         <h2 class="pb-8 text-3xl">Festival News</h2>
         <div class="max-h-[90%] flex flex-row flex-wrap gap-8 justify-center overflow-y-scroll no-scrollbar">
-            <!-- needs logic
-            foreach ($festivals as $festival)
-            
-            endforeach
-            -->
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
-            <x-festival-post/>
+            @forelse ($news as $festivalnews)
+                <x-festival.post :festivalnews="$festivalnews"/>
+            @empty
+            @endforelse
         </div>
     </div>
 </div>
