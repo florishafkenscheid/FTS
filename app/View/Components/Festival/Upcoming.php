@@ -3,19 +3,18 @@
 namespace App\View\Components\Festival;
 
 use App\Models\Festival;
-use App\Models\FestivalNews;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Post extends Component
+class Upcoming extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public Festival $festival, public FestivalNews $festivalNews)
+    public function __construct(public Festival $festival)
     {
-       
+        //
     }
 
     /**
@@ -23,6 +22,6 @@ class Post extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.festival.post');
+        return view('components.festival.upcoming');
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Festival extends Model
 {
     use HasFactory;
+
+    // Relations
     /**
      * Users that belong to this festival
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

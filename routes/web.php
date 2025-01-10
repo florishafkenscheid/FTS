@@ -13,6 +13,8 @@ Route::get('/busreizen', function () {
     return view('busreizen.index');
 })->name('busreizen');
 
+Route::post('/busreizen', [HomeController::class, 'search'])->name('search_busreizen');
+
 Route::get('/profile', function() {
     return view('profile.index');
 })->name('profile');
