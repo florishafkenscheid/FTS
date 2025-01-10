@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex flex-col ml-12 -mr-8 w-1/5"> <!-- departure -->
                     <label class="px-3">Departure</label>
-                    <input class="bg-slate-400 rounded-md w-11/12" type="date" name="date" required>
+                    <input class="bg-slate-400 rounded-md w-11/12" type="date" name="date" id="date" required>
                 </div>
                 <div class="flex flex-col w-1/5"> <!-- passengers -->
                     <label class="px-3">Passengers</label>

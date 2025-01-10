@@ -2,12 +2,20 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Festival extends Model
 {
     use HasFactory;
+
+    public static function upcoming() {
+        $today = Carbon::today()->toDateString();
+        //$upcoming = Festival::where('start_at', '>', "$today");
+        $upcoming = Festival::where('start_at', '<', "$today")->get();
+        return $upcoming;
+    }
 
     // Relations
     /**

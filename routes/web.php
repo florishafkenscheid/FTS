@@ -3,17 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TripController;
 use App\Models\Festival;
 use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index'])
 ->name('home');
 
-Route::get('/busreizen', function () {
-    return view('busreizen.index');
-})->name('busreizen');
+Route::get('/busreizen', [TripController::class, 'index'])->name('busreizen');
 
-Route::post('/busreizen', [HomeController::class, 'search'])->name('search_busreizen');
+Route::post('/busreizen', [TripController::class, 'search'])->name('search_busreizen');
 
 Route::get('/profile', function() {
     return view('profile.index');
