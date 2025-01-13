@@ -5,9 +5,8 @@
             <h2 class="text-white text-3xl">Upcoming</h2>
         </div>
         <div class="h-5/6 w-full flex flex-col gap-4 items-center overflow-scroll">
-            <!-- logic needed -->
             @forelse ($festivals as $festival)
-                <x-festival.select :festival="$festival"/>
+                <x-festival.select :festival="$festival" :selectedFestival="$selected"/>
             @empty
             @endforelse
         </div>
@@ -16,7 +15,29 @@
         <x-v-linebreak/>
     </div>
     <div class="h-full w-2/3 p-8">
-        <x-festival.trip/>
+        @if(isset($selected))
+        <div class="h-fit w-full">
+            <h2 class="text-4xl">
+                {{$selected->name}}
+            </h2>
+            <h4 class="text-xl">
+                {{date('Y-m-d', strtotime($selected->start_at))}}
+            </h4>
+            <div class="-mt-4 -mb-6">
+                <x-h-linebreak/>
+            </div>
+            @if($trips)
+                <div class="flex flex-row justify-between w-5/6">
+                    <h3 class="text-2xl">Departure from</h3>
+                    <h4 class="text-2xl">Travel time</h4>
+                </div>
+            @endif
+        </div>
+        @endif
+        @forelse ($trips as $trip)
+            <x-festival.trip :trip="$trip" :festival="$selected"/>
+        @empty
+        @endforelse
     </div>
 </div>
 

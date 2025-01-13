@@ -27,7 +27,7 @@ class TripFactory extends Factory
             'festival_id' => Festival::factory(),
             'departure_from' => fake()->city(),
             'departure_scheduled_at' => fake()->dateTimeInInterval('-1 week', '+1 days'),
-            'destination' => fake()->city(),
+            'destination' => fake()->word(),
             'arrival_scheduled_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
         ];
     }

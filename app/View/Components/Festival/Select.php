@@ -12,7 +12,7 @@ class Select extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public Festival $festival)
+    public function __construct(public ?Festival $festival, public ?Festival $selectedFestival)
     {
         //
     }

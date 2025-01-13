@@ -12,7 +12,9 @@ Route::get('/', [HomeController::class, 'index'])
 
 Route::get('/busreizen', [TripController::class, 'index'])->name('busreizen');
 
-Route::post('/busreizen', [TripController::class, 'search'])->name('search_busreizen');
+Route::get('/busreizen/search/{destination}', [TripController::class, 'searchByDestination'])->name('search_destination_busreizen');
+
+Route::post('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
 
 Route::get('/profile', function() {
     return view('profile.index');
