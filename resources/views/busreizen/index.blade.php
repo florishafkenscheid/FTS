@@ -33,6 +33,7 @@
                 </div>
             @endif
         </div>
+        @else
         @endif
         @forelse ($trips as $trip)
             <x-festival.trip :trip="$trip" :festival="$selected"/>

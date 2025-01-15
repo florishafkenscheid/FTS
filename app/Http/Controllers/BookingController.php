@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookings;
+use App\Models\Booking;
+use App\Models\Bus;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 
-class BookingsController extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index($id) {
+        $trip = Trip::findOrFail($id);
+        $seats_left = 35 - $trip->bus->passengers;
+        return view('busreizen.order', compact('trip'));
     }
 
     /**
@@ -28,13 +31,18 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedRequest = $request->validate([
+            'origin' => 'required|string|max:64',
+            'destination' => 'required|string|max:64',
+            'date' => 'required|date',
+            'passengers' => 'required|numeric',
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Bookings $bookings)
+    public function show(Booking $booking)
     {
         //
     }
@@ -42,7 +50,7 @@ class BookingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bookings $bookings)
+    public function edit(Booking $booking)
     {
         //
     }
@@ -50,7 +58,7 @@ class BookingsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bookings $bookings)
+    public function update(Request $request, Booking $booking)
     {
         //
     }
@@ -58,7 +66,7 @@ class BookingsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bookings $bookings)
+    public function destroy(Booking $booking)
     {
         //
     }

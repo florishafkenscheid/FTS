@@ -11,7 +11,7 @@ class TripController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(?Festival $selected, $trips = [])
+    public function index(?Festival $selected = null, $trips = [])
     {
         $festivals = Festival::upcoming();
         

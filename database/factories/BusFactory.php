@@ -26,6 +26,7 @@ class BusFactory extends Factory
             'max_capacity' => 35,
             'toilets' => fake()->numberBetween(0, 2),
             'brand' => fake()->company(),
+            'passengers' => fake()->numberBetween(0, 35),
         ];
     }
 }
