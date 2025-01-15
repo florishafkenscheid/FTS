@@ -32,11 +32,14 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validatedRequest = $request->validate([
-            'origin' => 'required|string|max:64',
-            'destination' => 'required|string|max:64',
-            'date' => 'required|date',
-            'passengers' => 'required|numeric',
+            'user_id' => 'required|numeric|exists:users',
+            'trip_id' => 'required|numeric|exists:trips',
+            'ticket_amount' => 'required|numeric|min:1',
         ]);
+
+        Booking::create($validatedRequest);
+
+        return redirect()->route('booking.complete');
     }
 
     /**

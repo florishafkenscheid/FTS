@@ -15,14 +15,11 @@
                 @csrf
                 <div class="flex flex-col text-center">
                     <label>Amount of tickets</label>
-                    <input type="number" name="ticket_amount" value="1" class="bg-slate-800 rounded-md" max="{{35 - $trip->bus->passengers}}"/> 
+                    <input type="number" name="ticket_amount" value="1" class="bg-slate-800 rounded-md" min="1" max="{{35 - $trip->bus->passengers}}" step="1"/> 
                     {{-- Race conditions, no back end checking bla bla bla het is buiten de scope :) --}}
                     {{-- Hidden, needed for store request --}}
-                    <input name="" value="" hidden/>
-                    <input name="" value="" hidden/>
-                    <input name="" value="" hidden/>
-                    <input name="" value="" hidden/>
-                    <input name="" value="" hidden/>
+                    <input name="trip_id" value="{{$trip->id}}" hidden/>
+                    <input name="user_id" value="1" hidden/> {{-- waiting on user auth first, then changing value="1" --}}
                 </div>
                 <input type="submit" value="Order" class="bg-green-400 w-fit p-2 rounded-md ml-auto">
             </form>
