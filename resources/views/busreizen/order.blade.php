@@ -21,7 +21,7 @@
                     <input name="trip_id" value="{{$trip->id}}" hidden/>
                     <input name="user_id" value="1" hidden/> {{-- waiting on user auth first, then changing value="1" --}}
                 </div>
-                <input type="submit" value="Order" class="bg-green-400 w-fit p-2 rounded-md ml-auto">
+                <input type="submit" value="Order" class="bg-green-400 w-fit p-2 rounded-md ml-auto cursor-pointer">
             </form>
         </div>
     </div>

@@ -23,7 +23,7 @@ Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->n
 
 Route::get('/profile', function() {
     return view('profile.index');
-})->name('profile');
+})->middleware('auth')->name('profile');
 
 Route::get('/profile/edit', function() {
     return view('profile.edit');

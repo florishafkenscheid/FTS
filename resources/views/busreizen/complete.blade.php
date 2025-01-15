@@ -1,3 +1,5 @@
-<div>
-    <!-- Act only according to that maxim whereby you can, at the same time, will that it should become a universal law. - Immanuel Kant -->
+<x-app-layout>
+<div class="h-[85vh] flex justify-center items-center">
+    <h1 class="text-4xl">Order complete!</h1>
 </div>
+</x-app-layout>
