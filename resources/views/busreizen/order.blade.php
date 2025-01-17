@@ -15,7 +15,7 @@
                 @csrf
                 <div class="flex flex-col text-center">
                     <label>Amount of tickets</label>
-                    <input type="number" name="amount_of_tickets" id="ticket_amount" value="1" class="bg-slate-800 rounded-md" min="1" max="{{35 - $trip->bus->passengers}}" step="1" oninput="updatePrice()" onload="updatePrice()"/> 
+                    <input type="number" name="amount_of_tickets" id="ticket_amount" value="1" class="bg-slate-800 rounded-md" min="1" max="{{35 - $trip->bus->passengers}}" step="1" oninput="updatePrice()"/> 
                     {{-- Race conditions, no back end checking bla bla bla het is buiten de scope :) --}}
                     <div>
                         <h4 class="bg-slate-800 rounded-md mt-4 p-2 pl-2 text-left">Subtotal: <span class="text-green-400" id="subtotal">{{$trip->price}}</span></h4>
@@ -42,6 +42,11 @@
 </x-app-layout>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updatePrice();
+    });
+
+
     function updatePrice() {
         let ticketPrice = {{$trip->price}};
         let ticketAmount = document.getElementById('ticket_amount').value;
