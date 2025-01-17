@@ -33,14 +33,6 @@ Route::get('/profile/friends', function() {
     return view('profile.friends');
 })->name('friends');
 
-Route::get('/login', function() {
-    return view('login.index');
-})->name('login');
-
-Route::get('/register', function() {
-    return view('register.index');
-})->name('register');
-
 Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
