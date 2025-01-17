@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('departure_scheduled_at');
             $table->string('destination', 255);
             $table->timestamp('arrival_scheduled_at');
-            $table->unsignedInteger('price');
+            $table->decimal('price', 4, 2);
             $table->timestamps();
         });
     }
