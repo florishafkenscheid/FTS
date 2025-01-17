@@ -11,6 +11,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function index() {
+        $user = Auth::user();
+        $festivals = $user->festivals;
+        
+        $friends = $user->friends;
+
+        return view('profile.index', compact('user', 'festivals', 'friends'));
+    }
     /**
      * Display the user's profile form.
      */

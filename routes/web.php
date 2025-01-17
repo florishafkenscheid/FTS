@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use App\Models\Festival;
 use Illuminate\Http\Request;
@@ -21,9 +22,7 @@ Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->middle
 
 Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->name('store_order');
 
-Route::get('/profile', function() {
-    return view('profile.index');
-})->middleware('auth')->name('profile');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 
 Route::get('/profile/edit', function() {
     return view('profile.edit');

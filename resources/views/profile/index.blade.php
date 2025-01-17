@@ -7,8 +7,8 @@
                 <!-- profile picture -->
             </div>
             <div class="flex flex-col m-4 -translate-y-1/2">
-                <h2 class="text-3xl">blousy</h2>
-                <h3 class="text-base">VIP</h3>
+                <h2 class="text-3xl">{{$user->name}}</h2>
+                <h3 class="text-base">{{ucfirst($user->rank)}}</h3>
             </div>
         </div>
         <div class="h-full w-1/2 pr-20 flex flex-col items-end justify-center gap-4">
@@ -27,15 +27,8 @@
                     <a class="cursor-pointer"><i class="fa-solid fa-chevron-right"></i></a>
                 </div>
             </div>
-            <div class="flex flex-col flex-grow ml-10 mt-4 gap-2">
-                <div>
-                    <h2>Rock am Ring</h2>
-                    <h3 class="text-sm">6-8 JUNE</h3>
-                </div>
-                <div>
-                    <h2>Pinkpop</h2>
-                    <h3 class="text-sm">20-22 JUNE</h3>
-                </div>
+            <div class="flex flex-col flex-grow pl-10 pt-4 gap-2">
+
             </div>
         </div>
         <div class="h-[125%] w-fit flex self-center mt-1">
@@ -47,13 +40,14 @@
                 <h4 class="text-sm">Upcoming</h4>
             </div>
             <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar"> <!-- misschien een gradient beneden om aan te duiden dat je kan scrollen -->
-                <x-friend-activity/>
-                <x-friend-activity/>
-                <x-friend-activity/>
-                <x-friend-activity/>
-                <x-friend-activity/>
-                <x-friend-activity/>
-                <x-friend-activity/>
+                @forelse ($friends as $friend)
+                    <x-friend.activity
+                    :friend={{$friend}}
+                    :festival={{$friend->upcomingFestival->first()}}/>
+                @empty
+                    
+                @endforelse
+                {{-- <x-friend-activity/> --}}
             </div>
         </div>
     </div>
