@@ -22,7 +22,7 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'trip_id' => Trip::factory(),
+            'amount_of_tickets' => fake()->numberBetween(0, 10),
         ];
     }
 }

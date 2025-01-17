@@ -22,7 +22,6 @@ class TripFactory extends Factory
     public function definition(): array
     {
         return [
-            'booking_id' => Booking::factory(),
             'bus_id' => Bus::factory(),
             'festival_id' => Festival::factory(),
             'departure_from' => fake()->city(),
