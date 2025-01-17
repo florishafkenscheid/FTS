@@ -17,7 +17,7 @@ Route::get('/busreizen/search/{destination}', [TripController::class, 'searchByD
 
 Route::post('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
 
-Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->name('order_busreis');
+Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->middleware('auth')->name('order_busreis');
 
 Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->name('store_order');
 

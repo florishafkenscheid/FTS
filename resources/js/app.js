@@ -16,5 +16,3 @@ document.querySelectorAll('#collapsible').forEach((collapsible) => {
         paragraph.classList.toggle('line-clamp-3');
     });
 });
-
-// document.getElementById("date").min = new Date().toISOString().split("T")[0];

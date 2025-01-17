@@ -14,7 +14,7 @@ class Booking extends Model
      * 
      * @var array<int, string>
      */
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'amount_of_tickets'];
 
     /**
      * Trips that belong to the booking

@@ -34,10 +34,15 @@ class BookingController extends Controller
         $validatedRequest = $request->validate([
             'user_id' => 'required|numeric|exists:users,id',
             'trip_id' => 'required|numeric|exists:trips,id',
-            'ticket_amount' => 'required|numeric|min:1',
+            'amount_of_tickets' => 'required|numeric|min:1',
         ]);
 
-        Booking::create($validatedRequest);
+        $booking = Booking::create([
+            'user_id' => $validatedRequest['user_id'],
+            'amount_of_tickets' => $validatedRequest['amount_of_tickets'],
+        ]);
+
+        $booking->trips()->attach($validatedRequest['trip_id']);
 
         return view('busreizen.complete');
     }

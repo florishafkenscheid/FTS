@@ -28,6 +28,7 @@ class TripFactory extends Factory
             'departure_scheduled_at' => fake()->dateTimeInInterval('-1 week', '+1 days'),
             'destination' => fake()->word(),
             'arrival_scheduled_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
+            'price' => fake()->numberBetween(1, 35),
         ];
     }
 }
