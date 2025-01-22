@@ -18,4 +18,8 @@
     .expanded {
         height: auto;
     }
+
+    .x-cloak {
+        display: none !important;
+    }
 }

@@ -10,10 +10,6 @@
         </div>
         <div class="h-5/6 w-full flex flex-col gap-4 items-center">
             <!-- logic needed -->
-            <x-festival-editor/>
-            <x-festival-editor/>
-            <x-festival-editor/>
-            <x-festival-editor/>
         </div>
     </div>
     <div class="h-5/6 w-fit flex self-center">
