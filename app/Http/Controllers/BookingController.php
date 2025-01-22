@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Bus;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -35,11 +36,40 @@ class BookingController extends Controller
             'user_id' => 'required|numeric|exists:users,id',
             'trip_id' => 'required|numeric|exists:trips,id',
             'amount_of_tickets' => 'required|numeric|min:1',
+            'use_points' => 'required|boolean'
         ]);
+
+        $trip = Trip::findOrFail($validatedRequest['trip_id']);
+        $user = User::findOrFail($validatedRequest['user_id']);
+        
+        $totalPrice = $trip->price * $validatedRequest['amount_of_tickets'];
+        if ($validatedRequest['use_points']) {
+            // Check if user has enough points
+            if ($user->points < $totalPrice) {
+                return back()->with('error', 'Not enough points!');
+            }
+            
+            // Apply 20% discount
+            $discount = $totalPrice * 0.20;
+            $finalPrice = $totalPrice - $discount;
+            
+            // Deduct points
+            $user->points -= $totalPrice;
+            $user->save();
+        } else {
+            $finalPrice = $totalPrice;
+            // Award new points (10% of purchase)
+            $pointsEarned = floor($finalPrice * 0.10);
+            $user->points += $pointsEarned;
+            $user->save();
+        }
 
         $booking = Booking::create([
             'user_id' => $validatedRequest['user_id'],
             'amount_of_tickets' => $validatedRequest['amount_of_tickets'],
+            'total_price' => $finalPrice,
+            'points_used' => $request->use_points ? $totalPrice : 0,
+            'points_earned' => $request->use_points ? 0 : $pointsEarned
         ]);
 
         $booking->trips()->attach($validatedRequest['trip_id']);

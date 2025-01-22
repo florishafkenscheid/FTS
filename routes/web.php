@@ -20,7 +20,7 @@ Route::post('/busreizen/search', [TripController::class, 'search'])->name('searc
 
 Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->middleware('auth')->name('order_busreis');
 
-Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->name('store_order');
+Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->middleware('auth')->name('store_order');
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 
