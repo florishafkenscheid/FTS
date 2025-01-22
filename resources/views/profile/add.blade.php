@@ -1,3 +1,7 @@
-<div>
-    <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
-</div>
+<x-app-layout>
+
+    <div class="h-[85vh] overflow-scroll no-scrollbar">
+       @livewire('user-search')
+    </div>
+
+</x-app-layout>

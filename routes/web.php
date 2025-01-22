@@ -26,11 +26,11 @@ Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')-
 
 Route::get('/profile/edit', function() {
     return view('profile.edit');
-})->name('edit_profile');
+})->middleware('auth')->name('edit_profile');
 
 Route::get('/profile/friends', function() {
-    return view('profile.friends');
-})->name('friends');
+    return view('profile.add');
+})->middleware('auth')->name('add_friends');
 
 Route::get('/contact', function () {
     return view('contact.index');

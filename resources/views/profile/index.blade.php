@@ -13,7 +13,7 @@
         </div>
         <div class="h-full w-1/2 pr-20 flex flex-col items-end justify-center gap-4">
             <button class="w-1/5 min-w-24 bg-slate-600 p-2 rounded-md text-start flex flex-row justify-between" onclick="window.location='{{ route('edit_profile') }}'">Edit profile<i class="fa-solid fa-pen self-center"></i></button>
-            <button class="w-1/5 min-w-24 bg-green-400 p-2 rounded-md text-start flex flex-row justify-between">Add friend<i class="fa-solid fa-user-plus self-center"></i></button>
+            <button class="w-1/5 min-w-24 bg-green-400 p-2 rounded-md text-start flex flex-row justify-between" onclick="window.location='{{ route('add_friends')}}'">Add friend<i class="fa-solid fa-user-plus self-center"></i></button>
         </div>
     </div>
     <x-h-linebreak/>
