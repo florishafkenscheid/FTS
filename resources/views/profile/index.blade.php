@@ -42,12 +42,10 @@
             <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar"> <!-- misschien een gradient beneden om aan te duiden dat je kan scrollen -->
                 @forelse ($friends as $friend)
                     <x-friend.activity
-                    :friend={{$friend}}
-                    :festival={{$friend->upcomingFestival->first()}}/>
+                    :friend="$friend"
+                    :upcomingFestival="$friend->upcomingFestival->first()"/>
                 @empty
-                    
                 @endforelse
-                {{-- <x-friend-activity/> --}}
             </div>
         </div>
     </div>

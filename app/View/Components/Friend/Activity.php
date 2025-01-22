@@ -13,7 +13,7 @@ class Activity extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public User $friend, public Festival $upcomingFestival)
+    public function __construct(public User $friend, public ?Festival $upcomingFestival)
     {
         //
     }
