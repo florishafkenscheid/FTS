@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Livewire\WithFileUploads;
 
 class EditProfile extends Component
 {
+    use WithFileUploads;
+
     public $showModal = false;
     public $modalType = '';
     public $name;
@@ -16,6 +19,7 @@ class EditProfile extends Component
     public $current_password;
     public $password;
     public $password_confirmation;
+    public $picture;
 
     public function mount()
     {
@@ -40,6 +44,9 @@ class EditProfile extends Component
                 break;
             case 'password':
                 $this->updatePassword();
+                break;
+            case 'picture':
+                $this->updatePicture();
                 break;
         }
     }
@@ -76,6 +83,19 @@ class EditProfile extends Component
 
         Auth::user()->update([
             'password' => Hash::make($this->password)
+        ]);
+        $this->closeModal();
+    }
+
+    public function updatePicture() {
+        $this->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:51200', // 50MB 
+        ]);
+
+        $path = $this->picture->store('profile_pictures', 'public');
+
+        Auth::user()->update([
+            'profile_picture' => str_replace('public/', 'storage/', $path),
         ]);
         $this->closeModal();
     }
