@@ -61,10 +61,9 @@ class User extends Authenticatable
      * Get the first upcoming festival for the user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function upcomingFestival() 
-    {
+    public function upcomingFestival() {
         return $this->festivals()
-            ->where('start_at', '>', '1970-01-01 00:00:00') // change date to now() when ready.
+            ->where('start_at', '>', now())
             ->orderBy('start_at', 'asc');
     }
 

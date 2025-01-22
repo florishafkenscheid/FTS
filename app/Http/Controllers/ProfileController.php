@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,19 @@ class ProfileController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $festivals = $user->festivals;
+        $festivals = $user->festivals
+                    ->sortByDesc('date')
+                    ->groupBy(function ($festival) {
+                        return Carbon::parse($festival->end_at)
+                                    ->year;
+                    });
         
         $friends = $user->friends;
 
-        return view('profile.index', compact('user', 'festivals', 'friends'));
+        $currentYear = request('year') ?? Carbon::now()->year;
+        $years = collect($festivals->keys())->unique()->sort();
+
+        return view('profile.index', compact('user', 'festivals', 'friends', 'currentYear', 'years'));
     }
     /**
      * Display the user's profile form.

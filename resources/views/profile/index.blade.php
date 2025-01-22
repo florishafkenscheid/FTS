@@ -22,13 +22,27 @@
             <div class="h-fit">
                 <h2 class="text-2xl ml-10 w-fit h-fit">Previous Festivals</h2>
                 <div class=" flex flex-row gap-2 ml-10 w-fit h-fit items-center"> <!-- todo: functionality (database dependant) -->
-                    <a class="cursor-pointer"><i class="fa-solid fa-chevron-left"></i></a>
-                    <h3 class="text-xl">2025</h3>
-                    <a class="cursor-pointer"><i class="fa-solid fa-chevron-right"></i></a>
+                    @if($currentYear > $years->first())
+                    <a class="cursor-pointer" 
+                    href="{{ request()->fullUrlWithQuery(['year' => $currentYear - 1]) }}">
+                    <i class="fa-solid fa-chevron-left"></i></a>
+                    @endif
+                    <h3 class="text-xl">{{$currentYear}}</h3>
+                    @if($currentYear < $years->last())
+                    <a class="cursor-pointer"
+                    href="{{ request()->fullUrlWithQuery(['year' => $currentYear + 1]) }}"><i class="fa-solid fa-chevron-right"></i></a>
+                    @endif
                 </div>
             </div>
-            <div class="flex flex-col flex-grow pl-10 pt-4 gap-2">
-
+            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
+                @if($festivals->has($currentYear))
+                    @forelse($festivals[$currentYear] as $festival)
+                        <x-festival.previous
+                        :festival="$festival"
+                        />
+                    @empty
+                    @endforelse
+                @endif
             </div>
         </div>
         <div class="h-[125%] w-fit flex self-center mt-1">
