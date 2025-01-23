@@ -15,12 +15,14 @@ class Festival extends Model
         'description',
         'email',
         'phone_number',
+        'start_at',
+        'end_at',
     ];
 
     public static function upcoming() {
         $today = Carbon::today()->toDateString();
-        //$upcoming = Festival::where('start_at', '>', "$today");
-        $upcoming = Festival::where('start_at', '<', "$today")->get();
+        // $upcoming = Festival::where('start_at', '>', "$today")->get();
+        $upcoming = Festival::where('start_at', '<', "$today")->get(); // Previous, used in development
         return $upcoming;
     }
 

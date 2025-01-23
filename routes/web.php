@@ -39,6 +39,8 @@ Route::get('/contact', function () {
 
 Route::get('/beheer', [BeheerController::class, 'index'])->name('beheer');
 
+Route::get('/beheer/festival/{festivalInfo}', [BeheerController::class, 'show'])->name('beheer.show');
+
 Route::get('/beheer/create', function() {
     return view('beheer.create');
 })->name('create_festival');

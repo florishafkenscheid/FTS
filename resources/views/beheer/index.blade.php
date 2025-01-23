@@ -1,7 +1,7 @@
 <x-app-layout>
 
 <div class="h-[85vh] overflow-hidden flex flex-row">
-    <div class="h-full w-1/3">
+    <div class="h-full min-w-[33%]">
         <div class="h-1/6 w-full flex flex-row justify-center items-center gap-4">
             <h2 class="text-white text-3xl">Upcoming</h2>
             <a href="{{route('create_festival')}}">
@@ -19,8 +19,8 @@
     <div class="h-5/6 w-fit flex self-center">
         <x-v-linebreak/>
     </div>
-    <div class="max-w-2/3 flex-grow">
-
+    <div class="flex-grow">
+        <x-festival.info :festival="$festivalInfo"/>
     </div>
 </div>
 

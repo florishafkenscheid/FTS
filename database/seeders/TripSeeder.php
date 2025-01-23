@@ -10,15 +10,17 @@ use Illuminate\Database\Seeder;
 
 class TripSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Trip::factory()
-            ->count(10)
-            ->has(Festival::factory())
-            ->has(Bus::factory())
-            ->create();
+        // Get all festivals
+        $festivals = Festival::all();
+        
+        foreach ($festivals as $festival) {
+            Trip::factory()
+                ->count(rand(1, 3)) // Create 1-3 trips per festival
+                ->for($festival)    // Associate with festival
+                ->has(Bus::factory())
+                ->create();
+        }
     }
 }
