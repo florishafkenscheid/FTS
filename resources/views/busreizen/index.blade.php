@@ -6,7 +6,7 @@
         </div>
         <div class="h-5/6 w-full flex flex-col gap-4 items-center overflow-scroll">
             @forelse ($festivals as $festival)
-                <x-festival.select :festival="$festival" :selectedFestival="$selected"/>
+                <x-festival.select :festival="$festival" :selectedFestival="$selected" :admin="false"/>
             @empty
             @endforelse
         </div>

@@ -2,6 +2,7 @@
     <div class="h-full w-full pl-20 flex items-center gap-4">
         <button wire:click="openModal('picture')">
             <div class="h-40 w-40 border-2 rounded-full hover:bg-slate-800 relative group">
+                <img src="{{ asset('storage/'. Auth::user()->profile_picture) }}" alt="" class="h-full w-full rounded-full object-cover group-hover:opacity-35">
                 <i class="fa-solid fa-plus fa-2xl absolute right-[40%] top-[50%] hidden group-hover:block"></i>
             </div>
         </button>

@@ -4,7 +4,7 @@
     <div class="h-1/3 w-full flex flex-row">
         <div class="h-full w-1/2 pl-20 flex items-center">
             <div class="h-40 w-40 border-2 rounded-full">
-                <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="" class="h-full w-full rounded-full object-">
+                <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="" class="h-full w-full rounded-full object-cover">
             </div>
             <div class="flex flex-col m-4 -translate-y-1/2">
                 <h2 class="text-3xl">{{$user->name}}</h2>
