@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Festival;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class FestivalController extends Controller
 {
@@ -28,7 +30,25 @@ class FestivalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedRequest = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'email' => 'required|email:rfc,dns',
+            'phone_number' => 'required|string|regex:/(?:\+?\(?\d{1,3}\)?[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{3,}/|min:10|max:100', // Same regex as update
+            'start_at' => 'required|date|after:today',
+            'end_at' => 'required|date|after:start_at'
+        ]);
+
+        Festival::create([
+            'name' => $validatedRequest['name'],
+            'description' => $validatedRequest['description'],
+            'email' => $validatedRequest['email'],
+            'phone_number' => $validatedRequest['phone_number'],
+            'start_at' => $validatedRequest['start_at'],
+            'end_at' => $validatedRequest['end_at'],
+        ]);
+
+        return Redirect::route('beheer');
     }
 
     /**
@@ -52,7 +72,19 @@ class FestivalController extends Controller
      */
     public function update(Request $request, Festival $festival)
     {
-        //
+        $validatedRequest = $request->validate([
+            'name' => 'sometimes|nullable|string|max:255',
+            'description' => 'sometimes|nullable|string|max:1000',
+            'email' => 'sometimes|nullable|email:rfc,dns',
+            'phone_number' => 'sometimes|nullable|string|regex:/(?:\+?\(?\d{1,3}\)?[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{3,}/|min:10|max:100',
+            'start_at' => 'sometimes|nullable|date|after:today',
+            'end_at' => 'sometimes|nullable|date|after:start_at'
+        ]); // Needs error handling but an admin knows how the system works in theory
+
+        // Get rid of null values before passing to update
+        $festival->update(array_filter($validatedRequest));
+        
+        return Redirect::route('beheer');
     }
 
     /**

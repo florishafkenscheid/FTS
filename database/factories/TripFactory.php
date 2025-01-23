@@ -22,13 +22,13 @@ class TripFactory extends Factory
     public function definition(): array
     {
         return [
-            'booking_id' => Booking::factory(),
             'bus_id' => Bus::factory(),
             'festival_id' => Festival::factory(),
             'departure_from' => fake()->city(),
             'departure_scheduled_at' => fake()->dateTimeInInterval('-1 week', '+1 days'),
-            'destination' => fake()->city(),
+            'destination' => fake()->word(),
             'arrival_scheduled_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
+            'price' => fake()->numberBetween(1, 35),
         ];
     }
 }

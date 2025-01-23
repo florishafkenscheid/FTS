@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Festival;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,39 @@ class TripController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(?Festival $selected = null, $trips = [])
     {
-        //
+        $festivals = Festival::upcoming();
+        
+        return view('busreizen.index', compact('festivals', 'trips', 'selected'));
+    }
+
+    public function search(Request $request) {
+        $validatedRequest = $request->validate([
+            'origin' => 'required|string|max:64',
+            'destination' => 'required|string|max:64',
+            'date' => 'required|date',
+            'passengers' => 'required|numeric',
+        ]);
+
+        $trips = Trip
+        ::where('departure_from', 'LIKE', "%{$validatedRequest['origin']}%")
+        ->where('destination', 'LIKE', "%{$validatedRequest['destination']}%")
+        ->where('departure_scheduled_at', 'LIKE', "{$validatedRequest['date']}%")
+        ->get();
+
+        $destination = Festival::where('name', $validatedRequest['destination'])->first();
+
+        return $this->index($destination, $trips);
+    }
+
+    public function searchByDestination($destination) {
+        $trips = Trip::where('destination', 'LIKE', "%{$destination}%")
+        ->get();
+
+        $destination = Festival::where('name', $destination)->first();
+
+        return $this->index($destination, $trips);
     }
 
     /**

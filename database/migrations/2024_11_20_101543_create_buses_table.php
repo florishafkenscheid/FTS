@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('max_capacity')->default(35);
             $table->unsignedInteger('toilets');
             $table->string('brand', 100);
+            $table->unsignedTinyInteger('passengers');
             $table->timestamps();
         });
     }

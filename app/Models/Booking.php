@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     * 
+     * @var array<int, string>
+     */
+    protected $fillable = ['user_id', 'amount_of_tickets'];
+
     /**
      * Trips that belong to the booking
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -17,6 +25,6 @@ class Booking extends Model
     }
 
     public function user() {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }
