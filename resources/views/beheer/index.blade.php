@@ -8,17 +8,19 @@
                 <i class="fa-solid fa-plus fa-xl translate-y-1/4"></i>
             </a>
         </div>
-        <div class="h-5/6 w-full flex flex-col gap-4 items-center">
-            <!-- logic needed -->
+        <div class="h-5/6 w-full flex flex-col gap-4 items-center overflow-scroll">
+            @forelse ($festivals as $festival)
+                <x-festival.select :festival="$festival" :selectedFestival="$selected"
+                :admin="true"/>
+            @empty
+            @endforelse
         </div>
     </div>
     <div class="h-5/6 w-fit flex self-center">
         <x-v-linebreak/>
     </div>
-    <div class="flex-grow">
-        @isset($festival)
-        {{$festival}}
-        @endisset
+    <div class="max-w-2/3 flex-grow">
+
     </div>
 </div>
 

@@ -24,6 +24,8 @@ class FestivalFactory extends Factory
             'start_at' => fake()-> dateTimeInInterval('-1 week', '+1 day'),
             'end_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
             'attendees' => fake()->randomNumber(),
+            'email' => fake()->safeEmail(),
+            'phone_number' => fake()->phoneNumber(),
         ];
     }
 }

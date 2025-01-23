@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('start_at');
             $table->timestamp('end_at');
             $table->unsignedInteger('attendees');
+            $table->string('email', 100);
+            $table->string('phone_number', 100); // Not accounting formatting etc, but thats a big ask.
             $table->timestamps();
         });
     }

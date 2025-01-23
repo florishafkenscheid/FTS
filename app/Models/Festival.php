@@ -10,6 +10,13 @@ class Festival extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'email',
+        'phone_number',
+    ];
+
     public static function upcoming() {
         $today = Carbon::today()->toDateString();
         //$upcoming = Festival::where('start_at', '>', "$today");

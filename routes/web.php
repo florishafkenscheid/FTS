@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeheerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\HomeController;
@@ -36,27 +37,20 @@ Route::get('/contact', function () {
     return view('contact.index');
 })->name('contact');
 
-Route::get('/beheer', function() {
-    return view('beheer.index');
-})->name('beheer');
-
-Route::post('/beheer', [FestivalController::class, 'store'])->name('store_festival');
+Route::get('/beheer', [BeheerController::class, 'index'])->name('beheer');
 
 Route::get('/beheer/create', function() {
     return view('beheer.create');
 })->name('create_festival');
+
+Route::post('/beheer', [FestivalController::class, 'store'])->name('store_festival');
 
 Route::get('/beheer/edit/{id}', function (int $id) {
     $festival = Festival::find($id);
     return view('beheer.edit', compact('festival'));
 })->name('edit_festival');
 
-Route::get('/beheer/show/{id}', function (int $id) {
-    $festival = Festival::find($id);
-    return view('beheer.index', compact('festival'));
-})->name('show_festival');
-
-Route::patch('/beheer/edit/{id}', [FestivalController::class, 'update'])->name('update_festival');
+Route::patch('/beheer/edit/{festival}', [FestivalController::class, 'update'])->name('update_festival');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
