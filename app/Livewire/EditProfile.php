@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -48,7 +49,23 @@ class EditProfile extends Component
             case 'picture':
                 $this->updatePicture();
                 break;
+            case 'delete':
+                $this->deleteUser();
+                break;
         }
+    }
+
+    public function updateProfile()
+    {
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'email', Rule::unique('users')->ignore(Auth::id())],
+        ]);
+
+        Auth::user()->update([
+            'name' => $this->name,
+            'email' => $this->email,
+        ]);
     }
 
     public function updateName()
@@ -98,6 +115,17 @@ class EditProfile extends Component
             'profile_picture' => str_replace('public/', 'storage/', $path),
         ]);
         $this->closeModal();
+    }
+
+    public function deleteUser() {
+        $this->validate([
+            'password' => 'required|current_password',
+        ]);
+        $user = User::find(Auth::user()->id);
+        $user->delete();
+        $this->closeModal();
+        Auth::logout();
+        $this->redirect('/');
     }
 
     public function closeModal()

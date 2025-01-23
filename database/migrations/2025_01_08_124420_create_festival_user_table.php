@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('festival_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('festival_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
     }
 

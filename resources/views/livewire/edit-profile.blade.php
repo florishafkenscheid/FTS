@@ -1,5 +1,5 @@
 <div class="h-1/3 w-full flex flex-row">
-    <div class="h-full w-1/2 pl-20 flex items-center gap-4">
+    <div class="h-full w-full pl-20 flex items-center gap-4">
         <button wire:click="openModal('picture')">
             <div class="h-40 w-40 border-2 rounded-full hover:bg-slate-800 relative group">
                 <i class="fa-solid fa-plus fa-2xl absolute right-[40%] top-[50%] hidden group-hover:block"></i>
@@ -30,6 +30,12 @@
                 </button>
             </div>
         </div>
+
+        <div class="h-1/4 w-1/12 mr-8 ml-auto">
+            <button wire:click="openModal('delete')" class="h-full w-full bg-red-500 rounded-md">Delete account</button>
+        </div>
+
+
 
         <!-- Name Modal -->
         @if($showModal && $modalType === 'name')
@@ -166,6 +172,38 @@
                         </button>
                         <button 
                             wire:click="updatePicture" 
+                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if($showModal && $modalType === 'delete')
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" wire:key="email-modal">
+                <div class="bg-slate-800 rounded-lg p-6 w-96">
+                    <h3 class="text-lg font-bold mb-4">Are you sure?</h3>
+                    <div>
+                        <input 
+                            type="password" 
+                            wire:model="password" 
+                            placeholder="Current Password"
+                            class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 bg-slate-600"
+                        >
+                        @error('delete') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                    
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button 
+                            wire:click="closeModal" 
+                            class="px-4 py-2 text-white hover:bg-slate-600 rounded"
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            wire:click="deleteUser" 
                             class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                         >
                             Save

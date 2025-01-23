@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Livewire\EditProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -25,16 +27,11 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-            ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+        Livewire::actingAs($user)
+            ->test(EditProfile::class)
+            ->set('name', 'Test User')
+            ->set('email', 'test@example.com')
+            ->call('updateProfile');
 
         $user->refresh();
 
@@ -45,18 +42,13 @@ class ProfileTest extends TestCase
 
     public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['email_verified_at' => now()]);
 
-        $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
-                'name' => 'Test User',
-                'email' => $user->email,
-            ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+        Livewire::actingAs($user)
+            ->test(EditProfile::class)
+            ->set('name', 'Test User')
+            ->set('email', $user->email)
+            ->call('updateProfile');
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -65,15 +57,10 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->delete('/profile', [
-                'password' => 'password',
-            ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/');
+        Livewire::actingAs($user)
+            ->test(EditProfile::class)
+            ->set('password', 'password')
+            ->call('deleteUser');
 
         $this->assertGuest();
         $this->assertNull($user->fresh());
@@ -83,16 +70,11 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->from('/profile')
-            ->delete('/profile', [
-                'password' => 'wrong-password',
-            ]);
-
-        $response
-            ->assertSessionHasErrorsIn('userDeletion', 'password')
-            ->assertRedirect('/profile');
+        Livewire::actingAs($user)
+            ->test(EditProfile::class)
+            ->set('password', 'wrong-password')
+            ->call('deleteUser')
+            ->assertHasErrors(['password']);
 
         $this->assertNotNull($user->fresh());
     }
