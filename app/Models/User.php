@@ -91,4 +91,8 @@ class User extends Authenticatable
     public function friendOf() {
         return $this->belongsToMany(User::class, 'user_user', 'friend_id', 'user_id');
     }
+
+    public function isAdmin() {
+        return $this->rank == 'admin';
+    }
 }

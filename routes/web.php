@@ -8,60 +8,32 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use App\Models\Festival;
-use Illuminate\Http\Request;
 
-Route::get('/', [HomeController::class, 'index'])
-->name('home');
-
+// Public routes
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/busreizen', [TripController::class, 'index'])->name('busreizen');
-
 Route::get('/busreizen/search/{destination}', [TripController::class, 'searchByDestination'])->name('search_destination_busreizen');
-
 Route::post('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
+Route::get('/contact', fn() => view('contact.index'))->name('contact');
 
-Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->middleware('auth')->name('order_busreis');
+// Authenticated user routes
+Route::middleware('auth')->group(function () {
+    Route::get('/busreizen/order/{id}', [BookingController::class, 'index'])->name('order_busreis');
+    Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->name('store_order');
+    
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', fn() => view('profile.edit'))->name('edit_profile');
+    Route::get('/profile/friends', fn() => view('profile.add'))->name('add_friends');
+});
 
-Route::post('/busreizen/order/complete', [BookingController::class, 'store'])->middleware('auth')->name('store_order');
-
-Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
-
-Route::get('/profile/edit', function() {
-    return view('profile.edit');
-})->middleware('auth')->name('edit_profile');
-
-Route::get('/profile/friends', function() {
-    return view('profile.add');
-})->middleware('auth')->name('add_friends');
-
-Route::get('/contact', function () {
-    return view('contact.index');
-})->name('contact');
-
-Route::get('/beheer', [BeheerController::class, 'index'])->name('beheer');
-
-Route::get('/beheer/festival/{festivalInfo}', [BeheerController::class, 'show'])->name('beheer.show');
-
-Route::get('/beheer/create', function() {
-    return view('beheer.create');
-})->name('create_festival');
-
-Route::post('/beheer', [FestivalController::class, 'store'])->name('store_festival');
-
-Route::get('/beheer/edit/{id}', function (int $id) {
-    $festival = Festival::find($id);
-    return view('beheer.edit', compact('festival'));
-})->name('edit_festival');
-
-Route::patch('/beheer/edit/{festival}', [FestivalController::class, 'update'])->name('update_festival');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+// Admin routes
+Route::middleware(['auth', 'admin'])->prefix('beheer')->group(function () {
+    Route::get('/', [BeheerController::class, 'index'])->name('beheer');
+    Route::get('/festival/{festivalInfo}', [BeheerController::class, 'show'])->name('beheer.show');
+    Route::get('/create', fn() => view('beheer.create'))->name('create_festival');
+    Route::post('/', [FestivalController::class, 'store'])->name('store_festival');
+    Route::get('/edit/{id}', fn(int $id) => view('beheer.edit', ['festival' => Festival::findOrFail($id)]))->name('edit_festival');
+    Route::patch('/edit/{festival}', [FestivalController::class, 'update'])->name('update_festival');
+});
 
 require __DIR__.'/auth.php';
