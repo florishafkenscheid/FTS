@@ -4,8 +4,6 @@
             <h3>{{$trip->departure_from}}</h3>
             <h4>
                 {{date('m-d | H:i:s', strtotime($trip->departure_scheduled_at))}}
-                -
-                {{date('H:i:s', strtotime($trip->arrival_scheduled_at))}}
             </h4>
         </div>
         <div class="flex justify-center items-center mx-4">

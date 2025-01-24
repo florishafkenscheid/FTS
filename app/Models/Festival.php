@@ -23,7 +23,8 @@ class Festival extends Model
         $today = Carbon::today()->toDateString();
         return Festival::where('start_at', '>', $today)
                       ->orderBy('start_at', 'asc')
-                      ->get();
+                      ->get()
+                      ->unique('name');
     }
 
     public function scopePrevious($query) {

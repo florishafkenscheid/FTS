@@ -29,7 +29,7 @@
             @if($trips)
                 <div class="flex flex-row justify-between w-5/6">
                     <h3 class="text-2xl">Departure from</h3>
-                    <h4 class="text-2xl">Travel time</h4>
+                    <h4 class="text-2xl">Departure time</h4>
                 </div>
             @endif
         </div>

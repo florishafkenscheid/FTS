@@ -12,7 +12,7 @@ class HomeController extends Controller
         {
             return view('home.index', [
                 'trips' => Trip::all(),
-                'festivals' => Festival::all(),
+                'festivals' => Festival::upcoming(),
                 'news' => FestivalNews::latest()->take(6)->get(),
             ]);
         }

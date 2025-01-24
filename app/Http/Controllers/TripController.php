@@ -39,18 +39,22 @@ class TripController extends Controller
                 ->whereHas('bus', function($query) use ($validatedRequest) {
                     $query->where('max_capacity', '>=', $validatedRequest['passengers']);
                 })
+                ->orderBy('departure_scheduled_at', 'asc')
                 ->get();
     
-            $destination = Festival::where('name', $validatedRequest['destination'])->first();
+            $destination = Festival::where('name', 'LIKE', "%{$validatedRequest['destination']}%")->first();
     
             return $this->index($destination, $trips);
         }
 
     public function searchByDestination($destination) {
         $trips = Trip::where('destination', 'LIKE', "%{$destination}%")
-        ->get();
+            ->orderBy('departure_scheduled_at', 'asc')
+            ->get();
 
-        $destination = Festival::where('name', $destination)->first();
+        // Get the exact upcoming festival instance by name
+        $destination = Festival::upcoming()
+            ->firstWhere('name', $destination);
 
         return $this->index($destination, $trips);
     }
