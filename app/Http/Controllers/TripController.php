@@ -26,11 +26,15 @@ class TripController extends Controller
             'passengers' => 'required|numeric',
         ]);
 
-        $trips = Trip
-        ::where('departure_from', 'LIKE', "%{$validatedRequest['origin']}%")
-        ->where('destination', 'LIKE', "%{$validatedRequest['destination']}%")
-        ->where('departure_scheduled_at', 'LIKE', "{$validatedRequest['date']}%")
-        ->get();
+        $searchDate = \Carbon\Carbon::parse($validatedRequest['date']);
+        
+        $trips = Trip::where('departure_from', 'LIKE', "%{$validatedRequest['origin']}%")
+            ->where('destination', 'LIKE', "%{$validatedRequest['destination']}%")
+            ->whereBetween('departure_scheduled_at', [
+                $searchDate->copy()->subDay()->startOfDay(),
+                $searchDate->copy()->addDay()->endOfDay()
+            ])
+            ->get();
 
         $destination = Festival::where('name', $validatedRequest['destination'])->first();
 

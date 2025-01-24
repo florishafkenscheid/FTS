@@ -13,8 +13,8 @@ use App\Models\Festival;
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/busreizen', [TripController::class, 'index'])->name('busreizen');
+Route::get('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
 Route::get('/busreizen/search/{destination}', [TripController::class, 'searchByDestination'])->name('search_destination_busreizen');
-Route::post('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
 Route::get('/contact', fn() => view('contact.index'))->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 

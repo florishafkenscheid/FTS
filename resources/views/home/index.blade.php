@@ -7,14 +7,32 @@
     <div class="min-h-32 h-[20vh] -mb-24">
         <!-- trip menu -->
         <div class="bg-slate-600 w-full h-2/3 -translate-y-2/3 rounded-md">
-            <form class="flex h-full px-6 items-center justify-around" action={{route('busreizen')}}>
-                <div class="flex flex-col -mr-8 w-1/4"> <!-- from -->
+            <form class="flex h-full px-6 items-center justify-around" method="GET" action={{route('search_busreizen')}}>
+                <div class="flex flex-col -mr-8 w-1/4">
                     <label class="px-3">From</label>
-                    <input class="bg-slate-400 rounded-md w-11/12" name="origin" required>
+                    <input class="bg-slate-400 rounded-md w-11/12" 
+                        name="origin" 
+                        list="origins" 
+                        autocomplete="off"
+                        required>
+                    <datalist id="origins">
+                        @foreach($trips->pluck('departure_from')->unique() as $location)
+                            <option value="{{ $location }}">
+                        @endforeach
+                    </datalist>
                 </div>
-                <div class="flex flex-col w-1/4"> <!-- to -->
+                <div class="flex flex-col w-1/4">
                     <label class="px-3">To</label>
-                    <input class="bg-slate-400 rounded-md w-11/12" name="destination" required>
+                    <input class="bg-slate-400 rounded-md w-11/12" 
+                        name="destination" 
+                        list="destinations"
+                        autocomplete="off"
+                        required>
+                    <datalist id="destinations">
+                        @foreach($trips->pluck('destination')->unique() as $location)
+                            <option value="{{ $location }}">
+                        @endforeach
+                    </datalist>
                 </div>
                 <div class="flex flex-col ml-12 -mr-8 w-1/5"> <!-- departure -->
                     <label class="px-3">Departure</label>
