@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use App\Models\Festival;
@@ -15,6 +16,7 @@ Route::get('/busreizen', [TripController::class, 'index'])->name('busreizen');
 Route::get('/busreizen/search/{destination}', [TripController::class, 'searchByDestination'])->name('search_destination_busreizen');
 Route::post('/busreizen/search', [TripController::class, 'search'])->name('search_busreizen');
 Route::get('/contact', fn() => view('contact.index'))->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Authenticated user routes
 Route::middleware('auth')->group(function () {

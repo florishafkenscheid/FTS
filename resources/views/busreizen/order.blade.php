@@ -16,7 +16,12 @@
                 @csrf
                 <div class="flex flex-col text-center">
                     <label>Amount of tickets</label>
-                    <input type="number" name="amount_of_tickets" id="ticket_amount" value="1" class="bg-slate-800 rounded-md" min="1" max="{{35 - $trip->bus->passengers}}" step="1" oninput="updatePrice()" required/> 
+                    <input type="number" name="amount_of_tickets" id="ticket_amount" value="1" 
+                        class="bg-slate-800 rounded-md" 
+                        min="1" 
+                        max="{{35 - $trip->bus->passengers}}" 
+                        step="1" 
+                        oninput="updatePrice()" required/> 
                     {{-- Race conditions, no back end checking bla bla bla het is buiten de scope :) --}}
                     <div>
                         <h4 class="bg-slate-800 rounded-md mt-4 p-2 pl-2 text-left">Subtotal: <span class="text-green-400" id="subtotal">{{$trip->price}}</span></h4>
@@ -46,12 +51,13 @@
     });
 
     function updatePrice() {
-        let ticketAmount = document.getElementById('ticket_amount').value;
+        let ticketAmount = parseInt(document.getElementById('ticket_amount').value) || 1;
         let isUsingPoints = document.getElementById('points').checked;
+        let basePrice = {{$trip->price}};
         let discount = isUsingPoints ? 0.8 : 1;
-        let subtotal = $trip->price * ticketAmount * discount;
+        let subtotal = basePrice * ticketAmount * discount;
 
-        let pointsNeeded = $trip->price * ticketAmount;
+        let pointsNeeded = Math.round(basePrice * ticketAmount);
         document.getElementById('points_display').innerHTML = `Use ${pointsNeeded} points? ({{Auth::user()->points}})`;
         document.getElementById('subtotal').innerHTML = subtotal.toFixed(2);
     }
