@@ -14,19 +14,33 @@ class ProfileController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $festivals = $user->festivals
-                    ->sortByDesc('date')
-                    ->groupBy(function ($festival) {
-                        return Carbon::parse($festival->end_at)
-                                    ->year;
-                    });
+        $now = Carbon::now();
         
-        $friends = $user->friends;
+        // Split festivals into previous and upcoming
+        $allFestivals = $user->festivals;
+        $previousFestivals = $allFestivals
+            ->filter(function ($festival) use ($now) {
+                return Carbon::parse($festival->end_at)->isPast();
+            })
+            ->sortByDesc('start_at')
+            ->groupBy(function ($festival) {
+                return Carbon::parse($festival->end_at)->year;
+            });
+        
+        // Get friends with their upcoming festivals
+        $friends = $user->friends->map(function ($friend) use ($now) {
+            $friend->upcomingFestival = $friend->festivals
+                ->filter(function ($festival) use ($now) {
+                    return Carbon::parse($festival->start_at)->isFuture();
+                })
+                ->sortBy('start_at');
+            return $friend;
+        });
 
         $currentYear = request('year') ?? Carbon::now()->year;
-        $years = collect($festivals->keys())->unique()->sort();
+        $years = collect($previousFestivals->keys())->unique()->sort();
 
-        return view('profile.index', compact('user', 'festivals', 'friends', 'currentYear', 'years'));
+        return view('profile.index', compact('user', 'previousFestivals', 'friends', 'currentYear', 'years'));
     }
     /**
      * Display the user's profile form.

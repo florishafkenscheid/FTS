@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Booking;
+use App\Models\Trip;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class BookingSeeder extends Seeder
 {
@@ -14,9 +14,20 @@ class BookingSeeder extends Seeder
      */
     public function run(): void
     {
-        Booking::factory()
-                ->count(10)
-                ->for(User::factory())
-                ->create();
+        $users = User::all();
+        $trips = Trip::all();
+
+        foreach ($users as $user) {
+            $bookingCount = fake()->numberBetween(1, 3);
+            
+            for ($i = 0; $i < $bookingCount; $i++) {
+                $booking = Booking::factory()
+                    ->for($user)
+                    ->create();
+
+                // Attach a random trip to the booking
+                $booking->trips()->attach($trips->random()->id);
+            }
+        }
     }
 }

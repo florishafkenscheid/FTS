@@ -21,14 +21,17 @@ class TripFactory extends Factory
      */
     public function definition(): array
     {
+        $departureDate = fake()->dateTimeBetween('now', '+2 months');
+        $arrivalDate = (clone $departureDate)->modify('+1 day');
+        
         return [
             'bus_id' => Bus::factory(),
             'festival_id' => Festival::factory(),
-            'departure_from' => fake()->city(),
-            'departure_scheduled_at' => fake()->dateTimeInInterval('-1 week', '+1 days'),
-            'destination' => fake()->word(),
-            'arrival_scheduled_at' => fake()->dateTimeInInterval('-5 days', '+6 days'),
-            'price' => fake()->numberBetween(1, 35),
+            'departure_from' => fake()->randomElement(['Amsterdam', 'Rotterdam', 'Utrecht', 'The Hague', 'Eindhoven']),
+            'departure_scheduled_at' => $departureDate,
+            'destination' => fake()->randomElement(['Lowlands', 'Pinkpop', 'Rock Werchter', 'Tomorrowland', 'Defqon.1']),
+            'arrival_scheduled_at' => $arrivalDate,
+            'price' => fake()->numberBetween(25, 75),
         ];
     }
 }

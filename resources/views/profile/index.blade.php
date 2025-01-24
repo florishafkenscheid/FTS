@@ -35,8 +35,8 @@
                 </div>
             </div>
             <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
-                @if($festivals->has($currentYear))
-                    @forelse($festivals[$currentYear] as $festival)
+                @if($previousFestivals->has($currentYear))
+                    @forelse($previousFestivals[$currentYear] as $festival)
                         <x-festival.previous
                         :festival="$festival"
                         />
@@ -53,12 +53,15 @@
                 <h2 class="text-2xl">Friend Activity</h2>
                 <h4 class="text-sm">Upcoming</h4>
             </div>
-            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar"> <!-- misschien een gradient beneden om aan te duiden dat je kan scrollen -->
+            <div class="flex-grow w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
                 @forelse ($friends as $friend)
-                    <x-friend.activity
-                    :friend="$friend"
-                    :upcomingFestival="$friend->upcomingFestival->first()"/>
+                    @if($friend->upcomingFestival->isNotEmpty())
+                        <x-friend.activity
+                            :friend="$friend"
+                            :upcomingFestival="$friend->upcomingFestival->first()"/>
+                    @endif
                 @empty
+                    <p class="text-gray-500 text-center mt-4">No friend activity</p>
                 @endforelse
             </div>
         </div>

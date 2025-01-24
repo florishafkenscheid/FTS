@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             BusSeeder::class,
-            UserSeeder::class,
             FestivalSeeder::class,
+            UserSeeder::class,
             BookingSeeder::class,
             FestivalNewsSeeder::class,
             TripSeeder::class,

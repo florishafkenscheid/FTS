@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Booking;
-use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +21,8 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'amount_of_tickets' => fake()->numberBetween(1, 10),
+            'amount_of_tickets' => fake()->numberBetween(1, 4),
+            'created_at' => fake()->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

@@ -21,11 +21,16 @@ class Festival extends Model
 
     public static function upcoming() {
         $today = Carbon::today()->toDateString();
-        // $upcoming = Festival::where('start_at', '>', "$today")->get();
-        $upcoming = Festival::where('start_at', '<', "$today")->get(); // Previous, used in development
-        return $upcoming;
+        return Festival::where('start_at', '>', $today)
+                      ->orderBy('start_at', 'asc')
+                      ->get();
     }
 
+    public function scopePrevious($query) {
+        return $query->where('start_at', '<', Carbon::today())
+                    ->orderBy('start_at', 'desc');
+    }
+    
     // Relations
     /**
      * Users that belong to this festival

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Festival;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -55,4 +56,37 @@ class UserFactory extends Factory
             'rank' => 'admin',
         ]);
     }
+    public function configure()
+        {
+            return $this->afterCreating(function (User $user) {
+                if (User::count() > 1) {
+                    // Get friends
+                    $friends = User::where('users.id', '!=', $user->id)
+                        ->inRandomOrder()
+                        ->take(fake()->numberBetween(1, 5))
+                        ->get();
+                    
+                    $user->friends()->attach($friends->pluck('id'));
+                    
+                    // Get all available festivals once
+                    $allFestivals = Festival::where('start_at', '>', now())->get();
+                    
+                    // Only proceed with festival attachment if there are festivals available
+                    if ($allFestivals->count() > 0) {
+                        foreach ($friends as $friend) {
+                            if ($friend->festivals()->count() === 0) {
+                                $count = min($allFestivals->count(), fake()->numberBetween(1, 3));
+                                $randomFestivals = $allFestivals->random($count);
+                                $friend->festivals()->attach($randomFestivals->pluck('id'));
+                            }
+                        }
+                        
+                        // For the current user
+                        $count = min($allFestivals->count(), fake()->numberBetween(1, 3));
+                        $userFestivals = $allFestivals->random($count);
+                        $user->festivals()->attach($userFestivals->pluck('id'));
+                    }
+                }
+            });
+        }
 }
