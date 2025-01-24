@@ -36,6 +36,7 @@ Route::middleware(['auth', 'admin'])->prefix('beheer')->group(function () {
     Route::post('/', [FestivalController::class, 'store'])->name('store_festival');
     Route::get('/edit/{id}', fn(int $id) => view('beheer.edit', ['festival' => Festival::findOrFail($id)]))->name('edit_festival');
     Route::patch('/edit/{festival}', [FestivalController::class, 'update'])->name('update_festival');
+    Route::delete('/edit/{festival}', [FestivalController::class, 'destroy'])->name('festivals.destroy');
 });
 
 require __DIR__.'/auth.php';

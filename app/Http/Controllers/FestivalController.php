@@ -92,6 +92,12 @@ class FestivalController extends Controller
      */
     public function destroy(Festival $festival)
     {
-        //
+        try {
+            $festival->delete();
+            return redirect()->route('beheer')->with('success', 'Festival deleted successfully');
+        } catch (\Exception $e) {
+            Log::error('Error deleting festival: ' . $e->getMessage());
+            return redirect()->route('beheer')->with('error', 'Failed to delete festival');
+        }
     }
 }
