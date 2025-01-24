@@ -18,28 +18,33 @@ class TripController extends Controller
         return view('busreizen.index', compact('festivals', 'trips', 'selected'));
     }
 
-    public function search(Request $request) {
-        $validatedRequest = $request->validate([
-            'origin' => 'required|string|max:64',
-            'destination' => 'required|string|max:64',
-            'date' => 'required|date',
-            'passengers' => 'required|numeric',
-        ]);
-
-        $searchDate = \Carbon\Carbon::parse($validatedRequest['date']);
-        
-        $trips = Trip::where('departure_from', 'LIKE', "%{$validatedRequest['origin']}%")
-            ->where('destination', 'LIKE', "%{$validatedRequest['destination']}%")
-            ->whereBetween('departure_scheduled_at', [
-                $searchDate->copy()->subDay()->startOfDay(),
-                $searchDate->copy()->addDay()->endOfDay()
-            ])
-            ->get();
-
-        $destination = Festival::where('name', $validatedRequest['destination'])->first();
-
-        return $this->index($destination, $trips);
-    }
+    public function search(Request $request) 
+        {
+            $validatedRequest = $request->validate([
+                'origin' => 'required|string|max:64',
+                'destination' => 'required|string|max:64',
+                'date' => 'required|date',
+                'passengers' => 'required|numeric|min:1',
+            ]);
+    
+            $searchDate = \Carbon\Carbon::parse($validatedRequest['date']);
+            
+            $trips = Trip::query()
+                ->where('departure_from', 'LIKE', "%{$validatedRequest['origin']}%")
+                ->where('destination', 'LIKE', "%{$validatedRequest['destination']}%")
+                ->whereBetween('departure_scheduled_at', [
+                    $searchDate->copy()->subDay()->startOfDay(),
+                    $searchDate->copy()->addDay()->endOfDay()
+                ])
+                ->whereHas('bus', function($query) use ($validatedRequest) {
+                    $query->where('max_capacity', '>=', $validatedRequest['passengers']);
+                })
+                ->get();
+    
+            $destination = Festival::where('name', $validatedRequest['destination'])->first();
+    
+            return $this->index($destination, $trips);
+        }
 
     public function searchByDestination($destination) {
         $trips = Trip::where('destination', 'LIKE', "%{$destination}%")
